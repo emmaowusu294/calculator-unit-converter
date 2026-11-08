@@ -44,7 +44,14 @@ dotnet build
 dotnet test
 ```
 
-The xUnit tests in `tests/CalculatorUnitConverter.Tests` cover every public method in Core. They include normal cases, edge cases (zero, negatives, -40 where C and F meet, absolute zero, round trips), and error cases (divide by zero, overflow, rate <= 0, negative amounts and distances, midpoint rounding).
+`tests/CalculatorUnitConverter.Tests` contains 6 xUnit tests, two per Core class:
+
+- `Calculator` adds two numbers correctly
+- `Calculator` throws when dividing by zero
+- `UnitConverter` converts km to miles correctly
+- `UnitConverter` converts Celsius to Fahrenheit correctly
+- `CurrencyConverter` converts GHS to USD using the given rate
+- `CurrencyConverter` throws when the rate is 0 or less
 
 ## Project structure
 
@@ -86,4 +93,5 @@ tests/
 - Results are shown with up to 10 significant digits, so very precise `double` results are rounded for display. Very large or small values use E-notation.
 - Thousands separators are allowed for GHS amounts (`1,000.50`) but not for other numbers.
 - The UI is English-only, and the console app itself (Program.cs) has no automated tests. It was checked by hand.
+- The tests are a small sample. `Subtract`, `Multiply`, `MilesToKm`, `FahrenheitToCelsius`, overflow, rounding and the negative-value checks have no tests.
 - If input ends (Ctrl+Z / Ctrl+D, or piped input runs out), the app prints a goodbye message and exits.
